@@ -20,3 +20,5 @@ security:
       location: keys/public.pem
   private-key:
       location: keys/key.pem
+  access-key-expire-time: 3600
+  refresh-key-expire-time: 36000
