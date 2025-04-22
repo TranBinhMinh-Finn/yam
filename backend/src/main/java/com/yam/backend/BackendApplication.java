@@ -1,4 +1,4 @@
-package com.yam.yam;
+package com.yam.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

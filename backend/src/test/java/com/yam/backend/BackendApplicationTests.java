@@ -1,4 +1,4 @@
-package com.yam.yam;
+package com.yam.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
