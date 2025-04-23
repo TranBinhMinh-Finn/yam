@@ -9,12 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.time.Instant;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,9 +23,15 @@ public class AuthService {
 
     private final JwtService jwtService;
 
-    public AuthResponseDTO registerUser(RegisterDTO registerDTO) {
-        userService.register(registerDTO);
-        return null;
+    public AuthResponseDTO register(RegisterDTO registerDTO) {
+        User user = userService.register(registerDTO);
+        String accessKey = jwtService.generateAccessToken(user);
+        String refreshKey = jwtService.generateRefreshToken(user);
+
+        return AuthResponseDTO.builder()
+                .accessToken(accessKey)
+                .refreshToken(refreshKey)
+                .build();
     }
 
     public AuthResponseDTO login(LoginDTO loginDTO) {
