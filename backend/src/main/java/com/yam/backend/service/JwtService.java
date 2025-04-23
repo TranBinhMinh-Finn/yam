@@ -32,18 +32,10 @@ public class JwtService {
     String tokenIssuer;
 
     public String generateAccessToken(User user) {
-        return generateToken(user, accessKeyExpireTime);
-    }
-
-    public String generateRefreshToken(User user) {
-        return generateToken(user, refreshKeyExpireTime);
-    }
-
-    private String generateToken(User user, int expiresIn) {
         Instant now = Instant.now();
-        Instant expiresAt = now.plusSeconds(expiresIn);
+        Instant expiresAt = now.plusSeconds(accessKeyExpireTime);
 
-        var claims = JwtClaimsSet.builder()
+        var jwtClaimsSet = JwtClaimsSet.builder()
                 .issuer(tokenIssuer)
                 .issuedAt(now)
                 .expiresAt(expiresAt)
@@ -53,7 +45,25 @@ public class JwtService {
                 .build();
 
         return jwtEncoder
-                .encode(JwtEncoderParameters.from(claims))
+                .encode(JwtEncoderParameters.from(jwtClaimsSet))
+                .getTokenValue();
+    }
+
+    public String generateRefreshToken(User user) {
+        Instant now = Instant.now();
+        Instant expiresAt = now.plusSeconds(refreshKeyExpireTime);
+
+        var jwtClaimsSet = JwtClaimsSet.builder()
+                .issuer(tokenIssuer)
+                .issuedAt(now)
+                .expiresAt(expiresAt)
+                .claim("scope", "REFRESH")
+                .subject(user.getEmail())
+                .id(UUID.randomUUID().toString())
+                .build();
+
+        return jwtEncoder
+                .encode(JwtEncoderParameters.from(jwtClaimsSet))
                 .getTokenValue();
     }
 

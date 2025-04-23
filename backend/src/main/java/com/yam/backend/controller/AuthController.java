@@ -1,7 +1,6 @@
 package com.yam.backend.controller;
 
 import com.yam.backend.model.dto.request.LoginDTO;
-import com.yam.backend.model.dto.request.RefreshTokenDTO;
 import com.yam.backend.model.dto.request.RegisterDTO;
 import com.yam.backend.model.dto.response.AuthResponseDTO;
 import com.yam.backend.model.dto.response.RefreshTokenResponseDTO;
@@ -9,6 +8,8 @@ import com.yam.backend.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,8 +34,10 @@ public class AuthController {
     }
 
     @GetMapping("/refresh")
-    public ResponseEntity<?> refresh(@RequestBody RefreshTokenDTO refreshTokenDTO) {
-        String newAccessToken = authService.refreshAccessToken(refreshTokenDTO.getRefreshToken());
+    public ResponseEntity<?> refresh(Authentication authentication) {
+        Jwt jwt = (Jwt) authentication.getCredentials();
+        String token = jwt.getTokenValue();
+        String newAccessToken = authService.refreshAccessToken(token);
         return ResponseEntity.ok()
                 .body(RefreshTokenResponseDTO.builder()
                         .accessToken(newAccessToken)
