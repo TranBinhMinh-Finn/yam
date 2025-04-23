@@ -23,6 +23,9 @@ public class JwtService {
     @Value("${security.refresh-key-expire-time}")
     int refreshKeyExpireTime;
 
+    @Value("${security.token-issuer}")
+    String tokenIssuer;
+
     public String generateAccessToken(User user) {
         return generateToken(user, accessKeyExpireTime);
     }
@@ -36,10 +39,11 @@ public class JwtService {
         Instant expiresAt = now.plusSeconds(expiresIn);
 
         var claims = JwtClaimsSet.builder()
-                .issuer("yam.com")
+                .issuer(tokenIssuer)
                 .issuedAt(now)
                 .expiresAt(expiresAt)
                 .claim("scope", user.getRole())
+                .subject(user.getEmail())
                 .id(UUID.randomUUID().toString())
                 .build();
 

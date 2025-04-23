@@ -22,3 +22,4 @@ security:
       location: keys/key.pem
   access-key-expire-time: 3600
   refresh-key-expire-time: 36000
+  token-issuer: yam.com
