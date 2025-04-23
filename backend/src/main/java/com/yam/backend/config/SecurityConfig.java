@@ -47,7 +47,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/register").permitAll()
                 .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/api/auth/test").hasAuthority("ROLE_USER")
+                .requestMatchers("/api/auth/refresh").permitAll()
                 .anyRequest().authenticated()
         );
 

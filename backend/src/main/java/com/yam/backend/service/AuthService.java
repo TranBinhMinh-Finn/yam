@@ -52,4 +52,8 @@ public class AuthService {
                 .refreshToken(refreshKey)
                 .build();
     }
+
+    public String refreshAccessToken(String refreshToken) {
+        return jwtService.refreshAccessToken(refreshToken);
+    }
 }
