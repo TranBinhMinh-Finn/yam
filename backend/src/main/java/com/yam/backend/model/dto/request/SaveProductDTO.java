@@ -1,6 +1,7 @@
 package com.yam.backend.model.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ public class SaveProductDTO {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotNull
     private long price;
 
     @NotBlank

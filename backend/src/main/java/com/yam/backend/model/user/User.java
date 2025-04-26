@@ -5,10 +5,18 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+
+
 @Entity
 @Getter
 @Setter
 public class User {
+    public enum Role {
+        ADMIN,
+        SELLER,
+        CUSTOMER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -21,7 +29,7 @@ public class User {
 
     private String phoneNumber;
 
-    private String role = "USER";
+    private String role = Role.CUSTOMER.toString();
 
     @OneToOne
     private Cart cart;

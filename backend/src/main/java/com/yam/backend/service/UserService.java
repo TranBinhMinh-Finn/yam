@@ -4,7 +4,6 @@ import com.yam.backend.model.dto.request.RegisterDTO;
 import com.yam.backend.model.user.User;
 import com.yam.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +25,15 @@ public class UserService {
         user.setName(registerDTO.getName());
 
         return userRepository.save(user);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User with" + email + " does not exist"));
+    }
+
+    public User findById(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User with" + id + " does not exist"));
     }
 }
