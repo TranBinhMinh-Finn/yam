@@ -5,7 +5,6 @@ import com.yam.backend.model.dto.request.SaveProductDTO;
 import com.yam.backend.model.dto.request.UpdateProductDTO;
 import com.yam.backend.model.user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;

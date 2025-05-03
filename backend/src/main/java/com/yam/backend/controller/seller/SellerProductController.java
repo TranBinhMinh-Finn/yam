@@ -4,14 +4,10 @@ import com.yam.backend.model.Product;
 import com.yam.backend.model.dto.request.SaveProductDTO;
 import com.yam.backend.model.dto.request.UpdateProductDTO;
 import com.yam.backend.model.dto.response.ProductResponseDTO;
-import com.yam.backend.model.user.User;
 import com.yam.backend.service.SellerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +17,7 @@ public class SellerProductController {
     SellerService sellerService;
 
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody @Valid SaveProductDTO productDTO,
-                                                         Authentication authentication) {
+    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody @Valid SaveProductDTO productDTO) {
         Product product = sellerService.saveProduct(productDTO);
         ProductResponseDTO responseDTO = new ProductResponseDTO(product);
         return ResponseEntity
