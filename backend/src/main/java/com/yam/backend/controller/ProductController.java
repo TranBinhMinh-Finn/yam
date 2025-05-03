@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,52 +39,4 @@ public class ProductController {
                 .ok()
                 .body(responseDTO);
     }
-
-    @GetMapping("/seller/{sellerId}/all")
-    public ResponseEntity<List<Product>> listProductBySeller(@PathVariable long sellerId) {
-        return ResponseEntity
-                .ok()
-                .body(productService.listProductBySeller(sellerId));
-    }
-
-    @PostMapping
-    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody @Valid SaveProductDTO productDTO,
-                                              Authentication authentication) {
-        Jwt jwt = (Jwt) authentication.getCredentials();
-        String email = jwt.getSubject();
-        User user = userService.findByEmail(email);
-
-        Product product = productService.saveProduct(productDTO, user);
-        ProductResponseDTO responseDTO = new ProductResponseDTO(product);
-        return ResponseEntity
-                .ok()
-                .body(responseDTO);
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable long id,
-                                                 @Valid @RequestBody UpdateProductDTO productDTO,
-                                                 Authentication authentication) {
-        Jwt jwt = (Jwt) authentication.getCredentials();
-        String email = jwt.getSubject();
-        User user = userService.findByEmail(email);
-
-        Product product = productService.updateProduct(id, productDTO, user);
-        ProductResponseDTO responseDTO = new ProductResponseDTO(product);
-        return ResponseEntity
-                .ok()
-                .body(responseDTO);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable long id,
-                                              Authentication authentication) {
-        Jwt jwt = (Jwt) authentication.getCredentials();
-        String email = jwt.getSubject();
-        User user = userService.findByEmail(email);
-
-        productService.deleteProduct(id, user);
-        return ResponseEntity.noContent().build();
-    }
-
 }
