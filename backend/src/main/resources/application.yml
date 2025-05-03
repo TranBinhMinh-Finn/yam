@@ -10,11 +10,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQLDialect
+
 mysql:
   datasource:
     url: ${MYSQL_URL}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
+
 security:
   public-key:
       location: keys/public.pem
