@@ -28,6 +28,8 @@ public class Product {
 
     private boolean visible = false;
 
+    private boolean restricted = false;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="seller-id", referencedColumnName = "id")
     private User seller;

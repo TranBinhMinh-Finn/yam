@@ -31,6 +31,7 @@ public class SellerService {
         product.setPrice(productDTO.getPrice());
         product.setDescription(productDTO.getDescription());
         product.setSeller(getCurrentUser());
+        product.setVisible(productDTO.isVisible());
 
         return productService.saveProduct(product);
     }
@@ -44,6 +45,8 @@ public class SellerService {
         product.setName(updateProductDTO.getName());
         product.setPrice(updateProductDTO.getPrice());
         product.setDescription(updateProductDTO.getDescription());
+        product.setVisible(updateProductDTO.isVisible());
+
         return productService.updateProduct(product);
     }
 

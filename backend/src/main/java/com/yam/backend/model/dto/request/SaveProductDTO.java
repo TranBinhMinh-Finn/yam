@@ -16,4 +16,7 @@ public class SaveProductDTO {
 
     @NotBlank
     private String description;
+
+    @NotNull
+    private boolean visible;
 }

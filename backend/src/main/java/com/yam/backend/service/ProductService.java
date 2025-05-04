@@ -43,4 +43,10 @@ public class ProductService {
         product.setVisible(false);
         productRepository.save(product);
     }
+
+    public void changeProductRestrictStatus(long id, boolean status) {
+        Product product = findById(id);
+        product.setRestricted(status);
+        productRepository.save(product);
+    }
 }
