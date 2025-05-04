@@ -1,5 +1,6 @@
 package com.yam.backend.service;
 
+import com.yam.backend.exception.RequestException;
 import com.yam.backend.model.dto.request.RegisterDTO;
 import com.yam.backend.model.user.User;
 import com.yam.backend.repository.UserRepository;
@@ -16,7 +17,7 @@ public class UserService {
 
     public User register(RegisterDTO registerDTO) {
         if (userRepository.findUserByEmail(registerDTO.getEmail()).isPresent()) {
-            throw new RuntimeException("User with" + registerDTO.getEmail() + " already exists");
+            throw new RequestException("User with" + registerDTO.getEmail() + " already exists");
         }
 
         User user = new User();
@@ -29,11 +30,11 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findUserByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User with" + email + " does not exist"));
+                .orElseThrow(() -> new RequestException("User with" + email + " does not exist"));
     }
 
     public User findById(long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User with" + id + " does not exist"));
+                .orElseThrow(() -> new RequestException("User with" + id + " does not exist"));
     }
 }

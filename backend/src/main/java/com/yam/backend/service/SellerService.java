@@ -1,5 +1,6 @@
 package com.yam.backend.service;
 
+import com.yam.backend.exception.RequestException;
 import com.yam.backend.model.Product;
 import com.yam.backend.model.dto.request.SaveProductDTO;
 import com.yam.backend.model.dto.request.UpdateProductDTO;
@@ -40,7 +41,7 @@ public class SellerService {
     public Product updateProduct(long id, UpdateProductDTO updateProductDTO) {
         Product product = productService.findById(id);
         if(product.getSeller().getId() != getCurrentUser().getId()){
-            throw new RuntimeException("Product not found");
+            throw new RequestException("Product not found");
         }
         product.setName(updateProductDTO.getName());
         product.setPrice(updateProductDTO.getPrice());
@@ -54,7 +55,7 @@ public class SellerService {
     public void deleteProduct(long id) {
         Product product = productService.findById(id);
         if(product.getSeller().getId() != getCurrentUser().getId()){
-            throw new RuntimeException("Product not found");
+            throw new RequestException("Product not found");
         }
         productService.deleteProduct(id);
     }
