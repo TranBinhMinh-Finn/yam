@@ -60,5 +60,4 @@ public class SellerService {
         productService.deleteProduct(id);
     }
 
-
 }

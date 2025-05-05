@@ -5,6 +5,8 @@ import com.yam.backend.model.Product;
 import com.yam.backend.model.user.User;
 import com.yam.backend.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +21,6 @@ public class ProductService {
     public Product findById(long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Product not found"));
-    }
-
-    public List<Product> listProductBySeller(long sellerId) {
-        User user = userService.findById(sellerId);
-        return productRepository.findBySeller(user);
     }
 
     public List<Product> listProduct() {
@@ -50,4 +47,15 @@ public class ProductService {
         product.setRestricted(status);
         productRepository.save(product);
     }
+
+    public List<Product> getAllBySeller(long sellerId) {
+        User user = userService.findById(sellerId);
+        return productRepository.findAllBySeller(user);
+    }
+
+    public Page<Product> getProductsBySellerForAdmin(long sellerId, Pageable pageable) {
+        User user = userService.findById(sellerId);
+        return productRepository.findAllBySeller(user, pageable);
+    }
+
 }

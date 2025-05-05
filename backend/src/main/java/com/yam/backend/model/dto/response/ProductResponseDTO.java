@@ -13,8 +13,6 @@ public class ProductResponseDTO {
         this.name = product.getName();
         this.price = product.getPrice();
         this.description = product.getDescription();
-        this.deleted = product.isDeleted();
-        this.visible = product.isVisible();
         this.seller = new SellerDTO(product.getSeller());
     }
 
@@ -25,10 +23,6 @@ public class ProductResponseDTO {
     private long price;
 
     private String description;
-
-    private boolean deleted;
-
-    private boolean visible;
 
     private SellerDTO seller;
 
