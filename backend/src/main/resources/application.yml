@@ -26,3 +26,4 @@ security:
   access-key-expire-time: 3600
   refresh-key-expire-time: 36000
   token-issuer: yam.com
+  default-admin-password: ${DEFAULT_ADMIN_PASSWORD}
