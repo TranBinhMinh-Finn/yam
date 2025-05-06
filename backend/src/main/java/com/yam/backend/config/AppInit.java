@@ -24,6 +24,7 @@ public class AppInit implements CommandLineRunner {
         admin.setEmail("admin@yam.com");
         admin.setPassword(passwordEncoder.encode(defaultAdminPassword));
         admin.setName("admin");
+        admin.setRole(User.Role.ADMIN.toString());
 
         userRepository.save(admin);
     }
