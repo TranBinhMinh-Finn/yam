@@ -33,4 +33,8 @@ public class User {
 
     @OneToOne
     private Cart cart;
+
+    private boolean deleted = false;
+
+    private boolean active = true;
 }

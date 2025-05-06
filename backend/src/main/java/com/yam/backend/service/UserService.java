@@ -5,6 +5,8 @@ import com.yam.backend.model.dto.request.RegisterDTO;
 import com.yam.backend.model.user.User;
 import com.yam.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public User register(RegisterDTO registerDTO) {
-        if (userRepository.findUserByEmail(registerDTO.getEmail()).isPresent()) {
-            throw new RequestException("User with" + registerDTO.getEmail() + " already exists");
+        if (userRepository.findUserByEmailAndDeleted(registerDTO.getEmail(), false).isPresent()) {
+            throw new RequestException("User with email " + registerDTO.getEmail() + " already exists");
         }
 
         User user = new User();
@@ -29,12 +31,26 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        return userRepository.findUserByEmail(email)
-                .orElseThrow(() -> new RequestException("User with" + email + " does not exist"));
+        return userRepository.findUserByEmailAndDeleted(email, false)
+                .orElseThrow(() -> new RequestException("User with email " + email + " does not exist"));
     }
 
     public User findById(long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RequestException("User with" + id + " does not exist"));
+                .orElseThrow(() -> new RequestException("User with id " + id + " does not exist"));
+    }
+
+    public Page<User> getUsersForAdmin(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(long id) {
+        User user = findById(id);
+        user.setDeleted(true);
+        userRepository.save(user);
     }
 }
