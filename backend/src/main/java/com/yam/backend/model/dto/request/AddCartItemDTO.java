@@ -5,9 +5,9 @@ import jakarta.validation.constraints.Positive;
 
 public class AddCartItemDTO {
     @NotBlank
-    private long productId;
+    private Long productId;
 
     @NotBlank
     @Positive
-    private int quantity;
+    private Integer quantity;
 }

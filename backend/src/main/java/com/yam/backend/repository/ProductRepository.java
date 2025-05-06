@@ -14,4 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllBySeller(User seller);
 
     Page<Product> findAllBySeller(User seller, Pageable pageable);
+
+    Page<Product> findAllBySellerAndDeleted(User seller, boolean deleted, Pageable pageable);
 }

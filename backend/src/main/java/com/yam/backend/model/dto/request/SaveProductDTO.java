@@ -12,11 +12,11 @@ public class SaveProductDTO {
     private String name;
 
     @NotNull
-    private long price;
+    private Long price;
 
     @NotBlank
     private String description;
 
     @NotNull
-    private boolean visible;
+    private Boolean visible;
 }

@@ -53,6 +53,10 @@ public class ProductService {
         return productRepository.findAllBySeller(user);
     }
 
+    public Page<Product> getProductListForSeller(User seller, Pageable pageable) {
+        return productRepository.findAllBySellerAndDeleted(seller, false, pageable);
+    }
+
     public Page<Product> getProductsBySellerForAdmin(long sellerId, Pageable pageable) {
         User user = userService.findById(sellerId);
         return productRepository.findAllBySeller(user, pageable);
