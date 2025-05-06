@@ -23,6 +23,10 @@ public class ProductService {
                 .orElseThrow(() -> new RequestException("Product not found"));
     }
 
+    public Product findPubliclyVisibleProductById(long id) {
+        return productRepository.findByIdAndVisibleAndDeletedAndRestricted(id, true, false, false)
+                .orElseThrow(() -> new RequestException("Product not found"));
+    }
     public List<Product> listProduct() {
         return productRepository.findAll();
     }

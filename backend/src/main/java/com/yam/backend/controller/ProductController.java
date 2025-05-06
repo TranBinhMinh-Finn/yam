@@ -5,9 +5,10 @@ import com.yam.backend.model.dto.response.ProductResponseDTO;
 import com.yam.backend.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/products")
@@ -15,16 +16,9 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Product>> listProduct() {
-        return ResponseEntity
-                .ok()
-                .body(productService.listProduct());
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> getProduct(@PathVariable long id) {
-        Product product = productService.findById(id);
+        Product product = productService.findPubliclyVisibleProductById(id);
         ProductResponseDTO responseDTO = new ProductResponseDTO(product);
         return ResponseEntity
                 .ok()
