@@ -17,6 +17,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class SellerService {
@@ -46,7 +48,7 @@ public class SellerService {
     }
 
     @Transactional
-    public Product updateProduct(long id, UpdateProductDTO updateProductDTO) {
+    public Product updateProduct(UUID id, UpdateProductDTO updateProductDTO) {
         Product product = productService.findById(id);
         if (product.getSeller().getId() != getCurrentUser().getId()) {
             throw new RequestException("Product not found");
@@ -61,7 +63,7 @@ public class SellerService {
     }
 
     @Transactional
-    public void deleteProduct(long id) {
+    public void deleteProduct(UUID id) {
         Product product = productService.findById(id);
         if (product.getSeller().getId() != getCurrentUser().getId()) {
             throw new RequestException("Product not found");

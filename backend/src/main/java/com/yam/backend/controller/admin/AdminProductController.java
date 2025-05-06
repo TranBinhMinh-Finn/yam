@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/admin/products/")
 @RequiredArgsConstructor
@@ -14,13 +16,13 @@ public class AdminProductController {
     private final AdminProductService adminProductService;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> changeRestrictStatus(@PathVariable long id, @RequestParam boolean restrict) {
+    public ResponseEntity<Void> changeRestrictStatus(@PathVariable UUID id, @RequestParam boolean restrict) {
         adminProductService.changeProductRestrictStatus(id, restrict);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/by-seller")
-    public ResponseEntity<?> getProductByShop(@RequestParam(value="id") long id,
+    public ResponseEntity<?> getProductByShop(@RequestParam(value="id") UUID id,
                                               @RequestParam(value="page_size") int pageSize,
                                               @RequestParam(value="page_number") int pageNumber) {
         PageResponseDTO<AdminProductDTO> responseDTO = new PageResponseDTO<>(adminProductService

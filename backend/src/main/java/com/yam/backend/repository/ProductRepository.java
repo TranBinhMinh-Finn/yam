@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-    Optional<Product> findByIdAndVisibleAndDeletedAndRestricted(long id, boolean visible, boolean deleted, boolean restricted);
+public interface ProductRepository extends JpaRepository<Product, UUID> {
+    Optional<Product> findByIdAndVisibleAndDeletedAndRestricted(UUID id, boolean visible, boolean deleted, boolean restricted);
 
     List<Product> findAllBySeller(User seller);
 

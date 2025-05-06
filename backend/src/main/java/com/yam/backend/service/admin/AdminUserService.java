@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AdminUserService {
@@ -26,13 +28,13 @@ public class AdminUserService {
         return result.map(user -> modelMapper.map(user, AdminUserDTO.class));
     }
 
-    public void changeUserActiveStatus(long id, boolean active) {
+    public void changeUserActiveStatus(UUID id, boolean active) {
         User user = userService.findById(id);
         user.setActive(active);
         userService.updateUser(user);
     }
 
-    public void changeUserRole(long id, String role) {
+    public void changeUserRole(UUID id, String role) {
         User user = userService.findById(id);
         for (User.Role roleEnum : User.Role.values()) {
             if (roleEnum.toString().equals(role)) {

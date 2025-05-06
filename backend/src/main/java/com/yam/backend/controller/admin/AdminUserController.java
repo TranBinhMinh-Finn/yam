@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class AdminUserController {
     }
 
     @PatchMapping("/{id}/active")
-    public ResponseEntity<?> changeUserActiveStatus(@PathVariable long id,
+    public ResponseEntity<?> changeUserActiveStatus(@PathVariable UUID id,
                                                     @RequestBody Map<String,Object> body){
         if(!body.containsKey("active")){
             throw new RequestException("Request must contains new status");
@@ -38,7 +39,7 @@ public class AdminUserController {
     }
 
     @PatchMapping("/{id}/role")
-    public ResponseEntity<?> changeUserRole(@PathVariable long id,
+    public ResponseEntity<?> changeUserRole(@PathVariable UUID id,
                                             @RequestBody Map<String,Object> body){
         if(!body.containsKey("role")){
             throw new RequestException("Request must contains new status");

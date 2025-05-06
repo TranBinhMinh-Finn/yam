@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/seller/products")
 @RequiredArgsConstructor
@@ -39,7 +41,7 @@ public class SellerProductController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<SellerProductDTO> updateProduct(@PathVariable long id,
+    public ResponseEntity<SellerProductDTO> updateProduct(@PathVariable UUID id,
                                                           @Valid @RequestBody UpdateProductDTO productDTO) {
         Product product = sellerService.updateProduct(id, productDTO);
         SellerProductDTO responseDTO = modelMapper.map(product, SellerProductDTO.class);
@@ -49,7 +51,7 @@ public class SellerProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
         sellerService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }

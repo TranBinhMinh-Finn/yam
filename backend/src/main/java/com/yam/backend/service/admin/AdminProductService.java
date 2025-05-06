@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AdminProductService {
@@ -19,11 +21,11 @@ public class AdminProductService {
 
     private final ModelMapper modelMapper;
 
-    public void changeProductRestrictStatus(long id, boolean restrictStatus) {
+    public void changeProductRestrictStatus(UUID id, boolean restrictStatus) {
         productService.changeProductRestrictStatus(id, restrictStatus);
     }
 
-    public Page<AdminProductDTO> getProductsByShop(long shop_id,
+    public Page<AdminProductDTO> getProductsByShop(UUID shop_id,
                                            int pageSize,
                                            int pageNumber) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");

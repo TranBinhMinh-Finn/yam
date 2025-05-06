@@ -5,6 +5,8 @@ import com.yam.backend.model.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 public class ProductResponseDTO {
@@ -16,7 +18,7 @@ public class ProductResponseDTO {
         this.seller = new SellerDTO(product.getSeller());
     }
 
-    private long id;
+    private UUID id;
 
     private String name;
 
@@ -36,7 +38,7 @@ public class ProductResponseDTO {
             this.id = seller.getId();
         }
 
-        private long id;
+        private UUID id;
 
         private String name;
 

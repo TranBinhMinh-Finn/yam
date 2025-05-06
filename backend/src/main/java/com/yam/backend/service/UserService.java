@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -35,7 +37,7 @@ public class UserService {
                 .orElseThrow(() -> new RequestException("User with email " + email + " does not exist"));
     }
 
-    public User findById(long id) {
+    public User findById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RequestException("User with id " + id + " does not exist"));
     }
@@ -48,7 +50,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(long id) {
+    public void deleteUser(UUID id) {
         User user = findById(id);
         user.setDeleted(true);
         userRepository.save(user);
