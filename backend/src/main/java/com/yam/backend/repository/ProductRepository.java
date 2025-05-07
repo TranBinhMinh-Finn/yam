@@ -1,6 +1,6 @@
 package com.yam.backend.repository;
 
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import com.yam.backend.model.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

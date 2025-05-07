@@ -1,7 +1,7 @@
 package com.yam.backend.service;
 
 import com.yam.backend.exception.RequestException;
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import com.yam.backend.model.dto.request.SaveProductDTO;
 import com.yam.backend.model.dto.request.UpdateProductDTO;
 import com.yam.backend.model.dto.response.SellerProductDTO;

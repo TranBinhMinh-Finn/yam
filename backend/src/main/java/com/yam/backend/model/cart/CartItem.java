@@ -1,6 +1,6 @@
 package com.yam.backend.model.cart;
 
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

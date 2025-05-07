@@ -1,6 +1,6 @@
 package com.yam.backend.model.dto.response;
 
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import com.yam.backend.model.user.User;
 import lombok.Getter;
 import lombok.Setter;
