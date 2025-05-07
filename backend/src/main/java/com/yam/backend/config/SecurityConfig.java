@@ -37,6 +37,12 @@ public class SecurityConfig {
     @Value("${security.private-key.location}")
     private RSAPrivateKey privateKey;
 
+    private static final String[] PUBLIC_ENDPOINTS = {
+            "/api/auth/register",
+            "/api/auth/login",
+            "/api/products/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
@@ -45,9 +51,10 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/register").permitAll()
-                .requestMatchers("/api/auth/login").permitAll()
                 .requestMatchers("/api/auth/refresh").hasRole("REFRESH")
+                .requestMatchers("/api/seller/**").hasRole("SELLER")
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                 .anyRequest().authenticated()
         );
 

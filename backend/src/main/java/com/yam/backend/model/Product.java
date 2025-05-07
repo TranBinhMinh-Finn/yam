@@ -1,12 +1,13 @@
 package com.yam.backend.model;
 
+import com.yam.backend.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "product")
@@ -17,7 +18,7 @@ import java.util.Date;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
 
     private String name;
 
@@ -28,4 +29,10 @@ public class Product {
     private boolean deleted = false;
 
     private boolean visible = false;
+
+    private boolean restricted = false;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="seller-id", referencedColumnName = "id")
+    private User seller;
 }

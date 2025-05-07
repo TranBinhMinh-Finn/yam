@@ -10,11 +10,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQLDialect
+
 mysql:
   datasource:
     url: ${MYSQL_URL}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
+
 security:
   public-key:
       location: keys/public.pem
@@ -23,3 +26,4 @@ security:
   access-key-expire-time: 3600
   refresh-key-expire-time: 36000
   token-issuer: yam.com
+  default-admin-password: ${DEFAULT_ADMIN_PASSWORD}
