@@ -1,6 +1,7 @@
 package com.yam.backend.controller;
 
 import com.yam.backend.service.MediaService;
+import com.yam.backend.service.enums.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,8 @@ public class MediaController {
     private final MediaService mediaService;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadMedia(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> uploadMedia(@RequestParam("file") MultipartFile file,
+                                         @RequestParam("type") MediaType type) {
         String url = mediaService.uploadMedia(file);
         return ResponseEntity.ok().body(Map.of("url", url));
     }

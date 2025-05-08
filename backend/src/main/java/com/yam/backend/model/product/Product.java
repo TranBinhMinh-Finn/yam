@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +26,11 @@ public class Product {
     private long price;
 
     private String description;
+
+    private String thumbnailUrl;
+
+    @OneToMany
+    private List<ProductMedia> mediaList;
 
     private boolean deleted = false;
 

@@ -1,42 +1,35 @@
 package com.yam.backend.model.dto.response;
 
-import com.yam.backend.model.product.Product;
+import com.yam.backend.model.product.ProductMedia;
 import com.yam.backend.model.user.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 public class ProductResponseDTO {
-    public ProductResponseDTO(Product product) {
-        this.id = product.getId();
-        this.name = product.getName();
-        this.price = product.getPrice();
-        this.description = product.getDescription();
-        this.seller = new SellerDTO(product.getSeller());
-    }
-
     private UUID id;
 
     private String name;
+
+    private String thumbnailUrl;
 
     private long price;
 
     private String description;
 
+    private List<ProductMedia> mediaList;
+
     private SellerDTO seller;
 
     @Getter
     @Setter
+    @NoArgsConstructor
     public static class SellerDTO {
-
-        public SellerDTO(User seller) {
-            this.email = seller.getEmail();
-            this.name = seller.getName();
-            this.id = seller.getId();
-        }
 
         private UUID id;
 
