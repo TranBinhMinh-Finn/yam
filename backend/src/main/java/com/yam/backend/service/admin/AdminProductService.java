@@ -1,6 +1,6 @@
 package com.yam.backend.service.admin;
 
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import com.yam.backend.model.dto.response.AdminProductDTO;
 import com.yam.backend.service.ProductService;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.yam.backend.service;
 
 import com.yam.backend.exception.RequestException;
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import com.yam.backend.model.user.User;
 import com.yam.backend.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

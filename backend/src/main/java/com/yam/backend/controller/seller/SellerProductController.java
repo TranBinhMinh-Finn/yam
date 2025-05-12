@@ -1,6 +1,6 @@
 package com.yam.backend.controller.seller;
 
-import com.yam.backend.model.Product;
+import com.yam.backend.model.product.Product;
 import com.yam.backend.model.dto.request.SaveProductDTO;
 import com.yam.backend.model.dto.request.UpdateProductDTO;
 import com.yam.backend.model.dto.response.PageResponseDTO;
