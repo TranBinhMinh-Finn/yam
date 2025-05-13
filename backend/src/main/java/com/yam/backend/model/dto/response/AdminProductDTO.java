@@ -14,6 +14,8 @@ public class AdminProductDTO {
 
     private long price;
 
+    private int quantity;
+
     private String description;
 
     private boolean deleted;

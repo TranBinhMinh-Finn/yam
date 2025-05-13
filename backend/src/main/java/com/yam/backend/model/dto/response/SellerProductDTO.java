@@ -1,6 +1,7 @@
 package com.yam.backend.model.dto.response;
 
 import com.yam.backend.model.product.ProductMedia;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,8 @@ public class SellerProductDTO {
     private String thumbnailUrl;
 
     private String description;
+
+    private int quantity;
 
     private List<ProductMedia> mediaList;
 

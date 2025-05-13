@@ -29,6 +29,8 @@ public class Product {
 
     private String thumbnailUrl;
 
+    private int quantity;
+
     @OneToMany
     private List<ProductMedia> mediaList;
 

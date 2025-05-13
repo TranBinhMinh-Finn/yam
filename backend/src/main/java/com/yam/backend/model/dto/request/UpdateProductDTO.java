@@ -21,6 +21,9 @@ public class UpdateProductDTO {
     @Min(value = 0, message = "Price must not be negative")
     private Long price;
 
+    @NotNull
+    private Integer quantity;
+
     @NotBlank
     @URL
     private String thumbnailUrl;

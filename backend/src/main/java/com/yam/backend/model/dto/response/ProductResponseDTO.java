@@ -20,6 +20,8 @@ public class ProductResponseDTO {
 
     private long price;
 
+    private int quantity;
+
     private String description;
 
     private List<ProductMedia> mediaList;

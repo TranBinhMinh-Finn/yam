@@ -9,6 +9,7 @@ import java.util.UUID;
 
 
 @Entity
+@Table(name = "user")
 @Getter
 @Setter
 public class User {
@@ -31,9 +32,6 @@ public class User {
     private String phoneNumber;
 
     private String role = Role.CUSTOMER.toString();
-
-    @OneToOne
-    private Cart cart;
 
     private boolean deleted = false;
 

@@ -27,6 +27,9 @@ public class SaveProductDTO {
     private String description;
 
     @NotNull
+    private Integer quantity;
+
+    @NotNull
     private Boolean visible;
 
     @NotEmpty
