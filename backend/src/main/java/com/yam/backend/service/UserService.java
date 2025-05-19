@@ -34,12 +34,12 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findUserByEmailAndDeleted(email, false)
-                .orElseThrow(() -> new RequestException("User with email " + email + " does not exist"));
+                .orElseThrow(() -> new RequestException("User does not exist"));
     }
 
     public User findById(UUID id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RequestException("User with id " + id + " does not exist"));
+                .orElseThrow(() -> new RequestException("User does not exist"));
     }
 
     public Page<User> getUsersForAdmin(Pageable pageable) {

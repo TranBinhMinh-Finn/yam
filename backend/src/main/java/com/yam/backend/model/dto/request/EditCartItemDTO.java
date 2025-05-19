@@ -1,7 +1,7 @@
 package com.yam.backend.model.dto.request;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +9,11 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class AddCartItemDTO {
+public class EditCartItemDTO {
     @NotNull
-    private UUID productId;
+    UUID itemId;
 
     @NotNull
-    @Positive
-    private Integer quantity;
+    @Min(1)
+    Integer quantity;
 }

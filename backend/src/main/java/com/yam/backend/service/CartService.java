@@ -34,10 +34,7 @@ public class CartService {
     }
 
     public Cart getCurrentUserCart() {
-        return findByUser(getCurrentUser());
-    }
-
-    public Cart findByUser(User user) {
+        User user = getCurrentUser();
         Cart cart = cartRepository.findByUser(user);
         if(cart == null) {
             cart = new Cart();
@@ -55,6 +52,16 @@ public class CartService {
             throw new RequestException("Quantity exceeds product stock");
         }
 
+        if(!cart.getItems().isEmpty()) {
+            for(CartItem item: cart.getItems()){
+                if(item.getProduct().getId().equals(product.getId())){
+                    item.setQuantity(item.getQuantity() + quantity);
+                    cartItemRepository.save(item);
+                    return cartRepository.save(cart);
+                }
+            }
+        }
+
         CartItem cartItem = new CartItem();
         cartItem.setProduct(product);
         cartItem.setQuantity(quantity);
@@ -67,9 +74,22 @@ public class CartService {
 
     public void removeFromCart(UUID cartId) {
         Cart cart = getCurrentUserCart();
-        CartItem item = cartItemRepository.getCartItemById(cartId);
+        CartItem item = cartItemRepository.getCartItemById(cartId)
+                .orElseThrow(() -> new RequestException("Item not found"));
         cart.getItems().remove(item);
         cartRepository.save(cart);
         cartItemRepository.delete(item);
+    }
+
+    public void editCartItem(UUID itemId, int quantity) {
+        Cart cart = getCurrentUserCart();
+        CartItem item = cartItemRepository.getCartItemById(itemId)
+                .orElseThrow(() -> new RequestException("Item not found"));
+        if(item.getCart().getId() != cart.getId()){
+            throw new RequestException("Item not editable");
+        }
+        item.setQuantity(quantity);
+        cartItemRepository.save(item);
+        cartRepository.save(cart);
     }
 }

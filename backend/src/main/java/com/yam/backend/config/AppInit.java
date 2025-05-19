@@ -20,6 +20,9 @@ public class AppInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if(userRepository.count() > 0)
+            return;
+
         User admin = new User();
         admin.setEmail("admin@yam.com");
         admin.setPassword(passwordEncoder.encode(defaultAdminPassword));
